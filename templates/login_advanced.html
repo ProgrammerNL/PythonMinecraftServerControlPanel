@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login - Minecraft Control Panel</title>
+    <!-- Include Bootstrap CSS (Assuming you have it locally, you can also use CDN) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <img src="{{ url_for('static', filename='minecraft_logo.png') }}" alt="Minecraft Logo">
+</head>
+<body class="text-center">
+    <form class="form-signin" method="post">
+        <!-- <img class="mb-4" src="{{ url_for('static', filename='minecraft_logo.png') }}" alt="" width="72" height="72"> -->
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        {{ form.csrf_token }}
+        {{ form.user_id.label(class="sr-only") }}
+        {{ form.user_id(class="form-control", placeholder="User ID", required="true", autofocus="true") }}
+        {{ form.submit(class="btn btn-lg btn-primary btn-block") }}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-{{ messages[0].split(' ')[0] }}">
+                    {{ messages[0].split(' ', 1)[1] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </form>
+</body>
+</html>
